@@ -7,5 +7,6 @@ export interface Doctor {
   rating: number;
   location: string;
   avatar: string;
-  availableSlots: string[]; // ISO strings for available times
+  available: boolean;
+  availableSlots: string[];
 }

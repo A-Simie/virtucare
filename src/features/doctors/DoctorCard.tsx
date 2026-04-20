@@ -2,7 +2,7 @@
 
 import { Doctor } from '@/types/doctor';
 import { Card, CardContent } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { Button, cn } from '@/components/ui/Button';
 import { 
   Star, 
   MapPin, 
@@ -14,7 +14,8 @@ import {
   Stethoscope,
   Brain,
   Baby,
-  Activity
+  Activity,
+  AlertCircle
 } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
 import { Specialty } from '@/types/doctor';
@@ -90,12 +91,19 @@ export function DoctorCard({ doctor, onBook }: DoctorCardProps) {
             <div className="flex flex-wrap gap-2 sm:gap-3">
               <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-50 rounded-xl border border-slate-100 text-[10px] sm:text-xs font-semibold text-slate-600">
                 <Clock size={12} className="text-slate-400" />
-                Next: <span className="text-[#0f172a]">2:00 PM</span>
+                Next: <span className="text-[#0f172a]">{doctor.available ? '2:00 PM' : 'N/A'}</span>
               </div>
-              <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-emerald-50 rounded-xl border border-emerald-100 text-[10px] sm:text-xs font-semibold text-emerald-700">
-                <ShieldCheck size={12} />
-                Available Today
-              </div>
+              {doctor.available ? (
+                <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-emerald-50 rounded-xl border border-emerald-100 text-[10px] sm:text-xs font-semibold text-emerald-700">
+                  <ShieldCheck size={12} />
+                  Available Today
+                </div>
+              ) : (
+                <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-red-50 rounded-xl border border-red-100 text-[10px] sm:text-xs font-semibold text-red-600">
+                  <AlertCircle size={12} />
+                  Not Available
+                </div>
+              )}
             </div>
 
             <p className="text-xs sm:text-sm text-slate-500 line-clamp-2 leading-relaxed">
@@ -106,11 +114,17 @@ export function DoctorCard({ doctor, onBook }: DoctorCardProps) {
           {/* Right: Action Section */}
           <div className="p-5 md:p-6 sm:border-l border-slate-100 bg-slate-50/50 flex flex-col justify-center gap-3 sm:w-48 lg:w-56 shrink-0">
             <Button 
-              variant="emerald" 
-              className="w-full h-11 sm:h-12 font-bold shadow-lg shadow-emerald-100 rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all text-sm"
+              variant={doctor.available ? "emerald" : "outline"}
+              className={cn(
+                "w-full h-11 sm:h-12 font-bold transition-all text-sm rounded-xl",
+                doctor.available 
+                  ? "shadow-lg shadow-emerald-100 hover:scale-[1.02] active:scale-[0.98]" 
+                  : "opacity-50 grayscale cursor-not-allowed bg-slate-100 text-slate-400 border-slate-200"
+              )}
+              disabled={!doctor.available}
               onClick={() => onBook(doctor)}
             >
-              Book Appointment
+              {doctor.available ? 'Book Appointment' : 'Fully Booked'}
             </Button>
             <Button 
               variant="outline" 
