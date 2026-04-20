@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { useAppointments } from '@/hooks/useAppointments';
 import { format, addDays, startOfDay, parseISO } from 'date-fns';
-import { formatTime } from '@/utils/date-helpers';
+import { Avatar } from '@/components/ui/Avatar';
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -91,7 +91,7 @@ export function BookingModal({ isOpen, onClose, doctor }: BookingModalProps) {
       >
         <div className="p-6 border-b border-slate-100 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <img src={doctor.avatar} alt={doctor.name} className="w-12 h-12 rounded-xl object-cover" />
+            <Avatar src={doctor.avatar} name={doctor.name} size="md" />
             <div>
               <h3 className="font-bold text-[#0f172a]">{doctor.name}</h3>
               <p className="text-xs text-[#134e4a]">{doctor.specialty} Specialist</p>

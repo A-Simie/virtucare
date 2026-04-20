@@ -4,12 +4,12 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button, cn } from '@/components/ui/Button';
 import { formatDate } from '@/utils/date-helpers';
-import { 
-  CalendarDays, 
-  Clock, 
-  MessageSquare, 
-  MoreVertical, 
-  XCircle, 
+import {
+  CalendarDays,
+  Clock,
+  MessageSquare,
+  MoreVertical,
+  XCircle,
   AlertTriangle,
   ChevronLeft,
   ChevronRight,
@@ -17,18 +17,19 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Skeleton } from '@/components/ui/Skeleton';
+import { Avatar } from '@/components/ui/Avatar';
 
 export function AppointmentTable() {
   const { appointments, cancelAppointment } = useAppointments();
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const [confirmCancelId, setConfirmCancelId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   // Pagination State
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [isPerPageOpen, setIsPerPageOpen] = useState(false);
-  
+
   const menuRef = useRef<HTMLDivElement>(null);
   const perPageRef = useRef<HTMLDivElement>(null);
 
@@ -51,7 +52,7 @@ export function AppointmentTable() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const sortedAppointments = [...appointments].sort((a, b) => 
+  const sortedAppointments = [...appointments].sort((a, b) =>
     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 
@@ -99,8 +100,9 @@ export function AppointmentTable() {
                 <CardContent className="p-6">
                   <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
                     <div className="flex items-center gap-5 w-full lg:w-[30%]">
-                      <Skeleton className="w-14 h-14 rounded-2xl shrink-0" />
+                      <Skeleton className="w-14 h-14 rounded-full shrink-0" />
                       <div className="space-y-2">
+
                         <Skeleton className="w-32 h-5" />
                         <Skeleton className="w-24 h-4" />
                       </div>
@@ -130,7 +132,7 @@ export function AppointmentTable() {
                       {/* Column 1: Doctor */}
                       <div className="flex items-center gap-5 w-full lg:w-[30%]">
                         <div className={cn(
-                          "w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center font-bold text-lg shrink-0",
+                          "w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center font-bold text-lg shrink-0",
                           app.status === 'cancelled' ? "bg-slate-200 text-slate-500" : "bg-[#ecfdf5] text-[#134e4a]"
                         )}>
                           {app.doctorName.split(' ').map(n => n[0]).join('')}
@@ -169,7 +171,7 @@ export function AppointmentTable() {
 
                       {/* Column 5: Action */}
                       <div className="flex items-center gap-2 w-full lg:w-[5%] pt-4 lg:pt-0 border-t lg:border-none border-slate-100 relative">
-                        <button 
+                        <button
                           onClick={() => setOpenMenuId(openMenuId === app.id ? null : app.id)}
                           className="p-2.5 text-slate-400 hover:bg-slate-100 rounded-xl transition-colors border border-transparent hover:border-slate-200 ml-auto lg:ml-0"
                         >
@@ -221,17 +223,17 @@ export function AppointmentTable() {
             <p className="text-sm text-slate-500 font-medium">
               Showing <span className="text-[#0f172a] font-bold">{startIndex + 1}</span> to <span className="text-[#0f172a] font-bold">{Math.min(startIndex + itemsPerPage, sortedAppointments.length)}</span> of <span className="text-[#0f172a] font-bold">{sortedAppointments.length}</span>
             </p>
-            
+
             {/* Items Per Page Selector */}
             <div className="relative" ref={perPageRef}>
-              <button 
+              <button
                 onClick={() => setIsPerPageOpen(!isPerPageOpen)}
                 className="flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-sm font-bold text-[#0f172a] hover:border-[#2dd4bf] transition-all"
               >
                 {itemsPerPage} per page
                 <ChevronDown size={14} className={cn("transition-transform", isPerPageOpen && "rotate-180")} />
               </button>
-              
+
               <AnimatePresence>
                 {isPerPageOpen && (
                   <motion.div
@@ -272,7 +274,7 @@ export function AppointmentTable() {
             >
               <ChevronLeft size={18} />
             </Button>
-            
+
             <div className="flex items-center gap-1">
               {Array.from({ length: totalPages }).map((_, i) => {
                 const pageNum = i + 1;
@@ -287,8 +289,8 @@ export function AppointmentTable() {
                     onClick={() => handlePageChange(pageNum)}
                     className={cn(
                       "w-10 h-10 rounded-xl text-sm font-bold transition-all",
-                      currentPage === pageNum 
-                        ? "bg-[#0f172a] text-white shadow-lg shadow-slate-200" 
+                      currentPage === pageNum
+                        ? "bg-[#0f172a] text-white shadow-lg shadow-slate-200"
                         : "text-slate-500 hover:bg-slate-100"
                     )}
                   >

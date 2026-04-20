@@ -3,10 +3,10 @@
 import { useAppointments } from '@/hooks/useAppointments';
 import { Card, CardHeader, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { 
-  CalendarDays, 
-  Users, 
-  Activity, 
+import {
+  CalendarDays,
+  Users,
+  Activity,
   Clock,
   ChevronRight,
   TrendingUp,
@@ -105,7 +105,7 @@ export default function DashboardPage() {
               View All <ChevronRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-4">
             {isLoading ? (
               Array.from({ length: 3 }).map((_, i) => (

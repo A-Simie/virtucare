@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
 import { Specialty } from '@/types/doctor';
+import { Avatar } from '@/components/ui/Avatar';
 
 const specialtyIcons: Record<string, any> = {
   'Cardiology': HeartPulse,
@@ -39,18 +40,18 @@ export function DoctorCard({ doctor, onBook }: DoctorCardProps) {
       <CardContent className="p-0">
         <div className="flex flex-col sm:flex-row">
           {/* Left: Avatar Section */}
-          <div className="relative w-full sm:w-56 aspect-[4/5] sm:aspect-auto sm:h-auto bg-slate-50 overflow-hidden shrink-0">
+          <div className="relative w-full sm:w-64 aspect-[4/5] sm:aspect-auto bg-slate-50 overflow-hidden shrink-0">
             <img 
               src={doctor.avatar} 
               alt={doctor.name} 
-              className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+              className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
             />
-
-
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg border border-white shadow-sm flex items-center gap-1 opacity-0 sm:group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
-              <ShieldCheck size={12} className="text-emerald-500" />
-              <span className="text-[10px] font-bold text-slate-700 uppercase tracking-wider">Verified</span>
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
+              <div className="bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white shadow-sm flex items-center gap-1.5">
+                <ShieldCheck size={14} className="text-emerald-500" />
+                <span className="text-[10px] font-bold text-slate-700 uppercase tracking-widest">Verified</span>
+              </div>
             </div>
           </div>
 

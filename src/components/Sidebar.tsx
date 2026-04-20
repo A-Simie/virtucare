@@ -3,16 +3,17 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { 
-  LayoutDashboard, 
-  Search, 
-  CalendarDays, 
+import {
+  LayoutDashboard,
+  Search,
+  CalendarDays,
   Settings,
   Activity,
   Menu,
   X
 } from 'lucide-react';
 import { cn } from './ui/Button';
+import { Avatar } from './ui/Avatar';
 
 const navItems = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
@@ -50,8 +51,8 @@ export function Sidebar() {
                   onClick={() => setIsOpen(false)}
                   className={cn(
                     'flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group',
-                    isActive 
-                      ? 'bg-[#1e293b] text-[#2dd4bf] shadow-sm' 
+                    isActive
+                      ? 'bg-[#1e293b] text-[#2dd4bf] shadow-sm'
                       : 'text-slate-400 hover:bg-[#1e293b] hover:text-white'
                   )}
                 >
@@ -72,9 +73,7 @@ export function Sidebar() {
 
       <div className="p-4 border-t border-slate-800">
         <div className="flex items-center gap-3 px-4 py-3 bg-[#1e293b] rounded-xl border border-slate-700/50">
-          <div className="w-9 h-9 rounded-full bg-[#2dd4bf] flex items-center justify-center text-[#0f172a] font-bold text-xs shadow-inner">
-            SC
-          </div>
+          <Avatar name="Dr. S. Chen" size="sm" className="border-slate-700" />
           <div className="flex-1 overflow-hidden">
             <p className="text-sm font-semibold truncate text-white">Dr. S. Chen</p>
             <p className="text-[10px] text-slate-400 font-medium">Administrator</p>
@@ -92,7 +91,7 @@ export function Sidebar() {
           <Activity className="text-[#2dd4bf]" size={24} />
           <span className="font-bold text-white text-lg">VirtuCare</span>
         </div>
-        <button 
+        <button
           onClick={toggleSidebar}
           className="p-2 text-slate-400 hover:text-white transition-colors"
         >
@@ -107,7 +106,7 @@ export function Sidebar() {
 
       {/* Mobile Sidebar Overlay */}
       {isOpen && (
-        <div 
+        <div
           className="lg:hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[55] transition-opacity"
           onClick={() => setIsOpen(false)}
         />
