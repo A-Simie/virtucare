@@ -43,24 +43,25 @@ export default function DashboardPage() {
   return (
     <div className="max-w-7xl mx-auto space-y-10">
       {/* Welcome Section */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div>
-          <h1 className="text-4xl font-extrabold tracking-tight text-[#0f172a]">Hello, Dr. Chen</h1>
-          <p className="text-slate-500 mt-2 text-lg">Welcome back to your VirtuCare dashboard. You have {upcomingCount} appointments today.</p>
-        </div>
-        <div className="flex items-center gap-6">
-          <div className="hidden sm:flex gap-3">
-            <Button variant="outline" className="rounded-2xl h-12 shadow-sm bg-white">
-              <TrendingUp size={18} className="mr-2 text-indigo-600" />
-              View Reports
-            </Button>
-            <Link href="/find-doctors">
-              <Button variant="emerald" className="rounded-2xl h-12 font-bold shadow-lg shadow-emerald-100 px-6">
-                Book New Appointment
-              </Button>
-            </Link>
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-4xl font-extrabold tracking-tight text-[#0f172a]">Hello, Dr. Chen</h1>
+            <p className="text-slate-500 mt-2 text-lg">Welcome back to your VirtuCare dashboard. You have {upcomingCount} appointments today.</p>
           </div>
           <UserNav />
+        </div>
+        
+        <div className="flex flex-wrap gap-4 pt-2">
+          <Button variant="outline" className="rounded-2xl h-12 px-6 shadow-sm bg-white border-slate-200 hover:border-indigo-200 transition-colors">
+            <TrendingUp size={18} className="mr-2 text-indigo-600" />
+            View Clinical Reports
+          </Button>
+          <Link href="/find-doctors">
+            <Button variant="emerald" className="rounded-2xl h-12 font-bold shadow-lg shadow-emerald-100 px-8 hover:scale-[1.02] active:scale-[0.98] transition-all">
+              Book New Appointment
+            </Button>
+          </Link>
         </div>
       </div>
 

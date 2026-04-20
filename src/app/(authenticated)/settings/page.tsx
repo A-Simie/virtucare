@@ -2,12 +2,12 @@
 
 import { Card, CardHeader, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { 
-  User, 
-  Bell, 
-  Lock, 
-  Shield, 
-  Globe, 
+import {
+  User,
+  Bell,
+  Lock,
+  Shield,
+  Globe,
   Database,
   ChevronRight,
   LogOut
@@ -23,7 +23,6 @@ const settingsGroups = [
     items: [
       { name: 'Profile Information', icon: User, description: 'Update your name, email, and personal details' },
       { name: 'Password & Security', icon: Lock, description: 'Manage your password and 2FA settings' },
-      { name: 'Notifications', icon: Bell, description: 'Choose what updates you want to receive' },
     ]
   },
   {
@@ -45,11 +44,11 @@ export default function SettingsPage() {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-7xl mx-auto space-y-10">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-[#0f172a]">Settings</h1>
-          <p className="text-slate-500 mt-1">Manage your account preferences and security settings.</p>
+          <h1 className="text-4xl font-extrabold tracking-tight text-[#0f172a]">Settings</h1>
+          <p className="text-slate-500 mt-2 text-lg">Manage your account preferences and security settings.</p>
         </div>
         <UserNav />
       </div>
@@ -109,8 +108,8 @@ export default function SettingsPage() {
         )}
 
         <div className="pt-4">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             className="w-full h-14 rounded-2xl text-red-600 border-red-100 hover:bg-red-50 hover:border-red-200 font-bold gap-3"
           >
             <LogOut size={18} />

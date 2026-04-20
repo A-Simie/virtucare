@@ -59,6 +59,12 @@ export function BookingModal({ isOpen, onClose, doctor }: BookingModalProps) {
     });
 
     if (result.success) {
+      addNotification({
+        title: 'Appointment Booked',
+        message: `Your appointment with ${doctor.name} for ${format(selectedDate, 'MMM d')} at ${selectedTime} has been successfully scheduled.`,
+        type: 'booking',
+        link: '/appointments'
+      });
       setSuccess(true);
       setStep(3);
     } else {

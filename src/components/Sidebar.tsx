@@ -10,21 +10,25 @@ import {
   Settings,
   Activity,
   Menu,
-  X
+  X,
+  Bell
 } from 'lucide-react';
 import { cn } from './ui/Button';
 import { Avatar } from './ui/Avatar';
+import { useNotifications } from '@/context/NotificationContext';
 
 const navItems = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Find Doctors', href: '/find-doctors', icon: Search },
   { name: 'My Appointments', href: '/appointments', icon: CalendarDays },
+  { name: 'Notifications', href: '/notifications', icon: Bell },
   { name: 'Settings', href: '/settings', icon: Settings },
 ];
 
 export function Sidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const { unreadCount } = useNotifications();
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
@@ -61,7 +65,12 @@ export function Sidebar() {
                     isActive ? 'text-[#2dd4bf]' : 'text-slate-400 group-hover:text-white'
                   )} />
                   <span className="font-medium">{item.name}</span>
-                  {isActive && (
+                  {item.name === 'Notifications' && unreadCount > 0 && (
+                    <span className="ml-auto bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm shadow-red-500/20">
+                      {unreadCount}
+                    </span>
+                  )}
+                  {isActive && item.name !== 'Notifications' && (
                     <div className="ml-auto w-1.5 h-1.5 bg-[#2dd4bf] rounded-full shadow-[0_0_8px_#2dd4bf]" />
                   )}
                 </Link>

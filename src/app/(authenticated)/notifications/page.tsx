@@ -39,11 +39,11 @@ export default function NotificationsPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-7xl mx-auto space-y-10">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-[#0f172a]">Notifications</h1>
-          <p className="text-slate-500 mt-1">Stay updated with your latest medical activities.</p>
+          <h1 className="text-4xl font-extrabold tracking-tight text-[#0f172a]">Notifications</h1>
+          <p className="text-slate-500 mt-2 text-lg">Stay updated with your latest medical activities.</p>
         </div>
         <div className="flex items-center gap-4">
           <Button 
