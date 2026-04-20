@@ -40,92 +40,86 @@ export function DoctorCard({ doctor, onBook }: DoctorCardProps) {
       <CardContent className="p-0">
         <div className="flex flex-col sm:flex-row">
           {/* Left: Avatar Section */}
-          <div className="relative w-full sm:w-64 aspect-[4/5] sm:aspect-auto bg-slate-50 overflow-hidden shrink-0">
+          <div className="relative w-full sm:w-48 lg:w-64 aspect-[4/3] sm:aspect-auto bg-slate-50 overflow-hidden shrink-0">
             <img 
               src={doctor.avatar} 
               alt={doctor.name} 
-              className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
-              <div className="bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white shadow-sm flex items-center gap-1.5">
-                <ShieldCheck size={14} className="text-emerald-500" />
-                <span className="text-[10px] font-bold text-slate-700 uppercase tracking-widest">Verified</span>
-              </div>
-            </div>
           </div>
 
           {/* Middle: Info Section */}
-          <div className="flex-1 p-6 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
-              <div>
-                <div className="flex items-center gap-2 mb-1">
+          <div className="flex-1 p-5 md:p-6 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+              <div className="space-y-1">
+                <div className="flex items-center flex-wrap gap-2 mb-1">
                   {(() => {
                     const Icon = specialtyIcons[doctor.specialty] || Activity;
                     return (
-                      <div className="p-1.5 bg-[#ecfdf5] rounded-lg text-[#059669]">
-                        <Icon size={14} />
+                      <div className="p-1 bg-[#ecfdf5] rounded-lg text-[#059669]">
+                        <Icon size={12} />
                       </div>
                     );
                   })()}
-                  <Badge variant="success" className="bg-[#ecfdf5] text-[#059669] text-[10px] uppercase tracking-wider px-2 py-0.5 font-bold">
+                  <Badge variant="success" className="bg-[#ecfdf5] text-[#059669] text-[9px] sm:text-[10px] uppercase tracking-wider px-2 py-0.5 font-bold">
                     {doctor.specialty}
                   </Badge>
 
                   <div className="flex items-center gap-1 text-amber-400">
-                    <Star size={14} fill="currentColor" />
-                    <span className="text-sm font-bold text-[#0f172a]">{doctor.rating.toFixed(1)}</span>
+                    <Star size={12} fill="currentColor" />
+                    <span className="text-xs sm:text-sm font-bold text-[#0f172a]">{doctor.rating.toFixed(1)}</span>
                   </div>
                 </div>
-                <h3 className="text-xl font-extrabold text-[#0f172a] group-hover:text-[#134e4a] transition-colors">
+                <h3 className="text-lg md:text-xl font-extrabold text-[#0f172a] group-hover:text-[#134e4a] transition-colors line-clamp-1">
                   {doctor.name}
                 </h3>
-                <div className="flex items-center gap-4 mt-2 text-slate-500 text-sm font-medium">
+                <div className="flex items-center gap-4 mt-1 text-slate-500 text-xs sm:text-sm font-medium">
                   <div className="flex items-center gap-1.5">
-                    <MapPin size={14} className="text-slate-400" />
+                    <MapPin size={12} className="text-slate-400" />
                     {doctor.location}
                   </div>
                 </div>
               </div>
-              <div className="hidden sm:block text-right">
-                <p className="text-[10px] text-slate-400 uppercase font-bold tracking-widest mb-1">Consultation Fee</p>
-                <p className="text-lg font-black text-[#0f172a]">$150</p>
+              <div className="flex sm:block items-baseline gap-2">
+                <p className="text-[9px] text-slate-400 uppercase font-bold tracking-widest sm:mb-0.5">Fee</p>
+                <p className="text-base md:text-lg font-black text-[#0f172a]">$150</p>
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-3">
-              <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-50 rounded-xl border border-slate-100 text-xs font-semibold text-slate-600">
-                <Clock size={14} className="text-slate-400" />
-                Next: <span className="text-[#0f172a]">Today, 2:00 PM</span>
+            <div className="flex flex-wrap gap-2 sm:gap-3">
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-50 rounded-xl border border-slate-100 text-[10px] sm:text-xs font-semibold text-slate-600">
+                <Clock size={12} className="text-slate-400" />
+                Next: <span className="text-[#0f172a]">2:00 PM</span>
               </div>
-              <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-50 rounded-xl border border-emerald-100 text-xs font-semibold text-emerald-700">
-                <ShieldCheck size={14} />
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-emerald-50 rounded-xl border border-emerald-100 text-[10px] sm:text-xs font-semibold text-emerald-700">
+                <ShieldCheck size={12} />
                 Available Today
               </div>
             </div>
 
-            <p className="text-sm text-slate-500 line-clamp-2 leading-relaxed">
-              Leading specialist with over 15 years of clinical experience in advanced {doctor.specialty.toLowerCase()} treatments and patient-centered care.
+            <p className="text-xs sm:text-sm text-slate-500 line-clamp-2 leading-relaxed">
+              Leading specialist with over 15 years of clinical experience in advanced {doctor.specialty.toLowerCase()} treatments.
             </p>
           </div>
 
           {/* Right: Action Section */}
-          <div className="p-6 sm:border-l border-slate-100 bg-slate-50/50 flex flex-col justify-center gap-3 sm:w-56 shrink-0">
+          <div className="p-5 md:p-6 sm:border-l border-slate-100 bg-slate-50/50 flex flex-col justify-center gap-3 sm:w-48 lg:w-56 shrink-0">
             <Button 
               variant="emerald" 
-              className="w-full h-12 font-bold shadow-lg shadow-emerald-100 rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all"
+              className="w-full h-11 sm:h-12 font-bold shadow-lg shadow-emerald-100 rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all text-sm"
               onClick={() => onBook(doctor)}
             >
               Book Appointment
             </Button>
             <Button 
               variant="outline" 
-              className="w-full h-12 font-bold rounded-xl bg-white text-slate-600 hover:text-[#0f172a]"
+              className="w-full h-11 sm:h-12 font-bold rounded-xl bg-white text-slate-600 hover:text-[#0f172a] text-sm"
             >
-              <Phone size={16} className="mr-2" />
-              Quick Call
+              <Phone size={14} className="mr-2" />
+              Call
             </Button>
-            <p className="text-[10px] text-center text-slate-400 font-medium">No booking fees</p>
+            <p className="text-[9px] text-center text-slate-400 font-medium">No booking fees</p>
           </div>
         </div>
       </CardContent>

@@ -4,17 +4,20 @@ VirtuCare is a high-fidelity medical management platform engineered for clinical
 
 ## ✨ Core Features
 
-- **🛡️ Global Notification System**: Real-time alerts for bookings, cancellations, and system updates with a persistent side-drawer preview and full notification history.
-- **👨‍⚕️ Professional Specialist Directory**: A curated database of medical professionals with verified badges, specialty-specific iconography, and detailed clinical bios.
+- **🛡️ Global Notification System**: Real-time alerts for bookings, cancellations, and system events. Includes a persistent side-drawer and a full-page history audit.
+- **🔑 Personalized Identity**: Dynamic user greeting logic that utilizes the verified login email as the primary system identifier.
+- **🕵️ Security Session Tracking**: Automated "New Login" alerts in the notification hub to monitor account access with precise timestamps.
+- **👨‍⚕️ Professional Specialist Directory**: A curated database of medical professionals with verified badges, optimized for high-performance mobile viewing.
 - **📅 Advanced Appointment Orchestration**:
-    - **Intelligent Booking**: Multi-step animated flow with conflict resolution and double-booking prevention.
-    - **Live Management**: Full-featured appointment table with dynamic filtering, pagination, and status tracking.
-    - **Action Center**: Contextual menus for quick actions like cancellation with confirmation safeguards.
-- **📊 Dynamic Clinical Dashboard**: Real-time health statistics, upcoming consultation tracking, and system-wide activity logs.
+    - **Intelligent Booking**: Multi-step animated flow with conflict resolution.
+    - **Live Management**: Full-featured table with dynamic filtering and pagination.
+- **📊 Dynamic Clinical Dashboard**: Real-time health statistics and a redesigned action center for critical medical reports.
+- **⚠️ Privacy & Data Sovereignty**: 
+    - **Secure Data Wipe**: A phrase-confirmed "Danger Zone" utility to permanently reset all local storage data.
+    - **Functional Sign Out**: Integrated session termination across the entire portal.
 - **⚡ Performance-First UI**: 
-    - **Skeleton Loading**: Integrated across all pages to ensure zero layout shift and a perceived speed boost.
-    - **Reusable Architecture**: Centralized component system (Avatar, UserNav, IconButton) for absolute visual consistency.
-- **🎨 Premium Medical Aesthetics**: A sophisticated palette (Slate Indigo, Deep Teal, Emerald) paired with squircle-based geometry for a modern, professional feel.
+    - **Skeleton Loading**: Zero layout shift architecture across all authenticated routes.
+    - **Pixel-Perfect Responsiveness**: Deeply optimized mobile layouts for complex clinical components.
 
 ## 🚀 Getting Started
 
