@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, AlertTriangle, Trash2, ShieldAlert } from 'lucide-react';
+import { Trash2, ShieldAlert } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
 interface ResetDataModalProps {

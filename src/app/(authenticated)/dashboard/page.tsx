@@ -1,7 +1,7 @@
 'use client';
 
 import { useAppointments } from '@/hooks/useAppointments';
-import { Card, CardHeader, CardContent } from '@/components/ui/Card';
+import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import {
   CalendarDays,

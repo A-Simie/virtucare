@@ -2,21 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Calendar, Clock, ChevronRight, CheckCircle2, AlertCircle } from 'lucide-react';
+import { X, Calendar, Clock, ChevronRight, CheckCircle2, AlertCircle, ChevronLeft } from 'lucide-react';
 import { Doctor } from '@/types/doctor';
 import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
 import { useAppointments } from '@/hooks/useAppointments';
 import { 
   format, 
-  addDays, 
   startOfDay, 
-  parseISO, 
   startOfMonth, 
   endOfMonth, 
   eachDayOfInterval, 
   isToday, 
-  isPast, 
   isBefore, 
   addMonths, 
   subMonths,
@@ -25,7 +21,6 @@ import {
   setMinutes
 } from 'date-fns';
 import { Avatar } from '@/components/ui/Avatar';
-import { ChevronLeft } from 'lucide-react';
 
 import { useNotifications } from '@/context/NotificationContext';
 

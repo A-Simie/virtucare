@@ -8,16 +8,9 @@ import {
   X,
   Calendar,
   Clock,
-  User,
-  Stethoscope,
   FileText,
-  ShieldCheck,
-  Phone,
-  Video,
-  MapPin,
   CheckCircle2,
   XCircle,
-  AlertCircle
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/Button';

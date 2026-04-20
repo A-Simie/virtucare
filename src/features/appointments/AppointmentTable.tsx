@@ -6,7 +6,6 @@ import { Button, cn } from '@/components/ui/Button';
 import { formatDate } from '@/utils/date-helpers';
 import {
   CalendarDays,
-  Clock,
   MessageSquare,
   MoreVertical,
   XCircle,

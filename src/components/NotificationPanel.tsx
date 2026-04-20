@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Bell, Calendar, Trash2, CheckCircle, ChevronRight, Inbox } from 'lucide-react';
+import { X, Bell, Calendar, Trash2, ChevronRight, Inbox } from 'lucide-react';
 import { useNotifications, Notification } from '@/context/NotificationContext';
 import { cn } from '@/components/ui/Button';
 import { formatDistanceToNow } from 'date-fns';

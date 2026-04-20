@@ -7,11 +7,8 @@ import {
   Bell, 
   Calendar, 
   Trash2, 
-  CheckCircle, 
-  ChevronRight, 
   Inbox,
   Clock,
-  MoreVertical,
   Check
 } from 'lucide-react';
 import { formatDistanceToNow, format } from 'date-fns';

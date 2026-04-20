@@ -3,19 +3,18 @@
 import { Doctor } from '@/types/doctor';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button, cn } from '@/components/ui/Button';
-import { 
-  Star, 
-  MapPin, 
-  Clock, 
-  ShieldCheck, 
-  ChevronRight, 
+import {
+  MapPin,
+  Clock,
+  ShieldCheck,
   Phone,
   HeartPulse,
   Stethoscope,
   Brain,
   Baby,
   Activity,
-  AlertCircle
+  AlertCircle,
+  Star
 } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
 import { Specialty } from '@/types/doctor';
@@ -42,9 +41,9 @@ export function DoctorCard({ doctor, onBook }: DoctorCardProps) {
         <div className="flex flex-col sm:flex-row">
           {/* Left: Avatar Section */}
           <div className="relative w-full sm:w-48 lg:w-64 aspect-[4/3] sm:aspect-auto bg-slate-50 overflow-hidden shrink-0">
-            <img 
-              src={doctor.avatar} 
-              alt={doctor.name} 
+            <img
+              src={doctor.avatar}
+              alt={doctor.name}
               className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -113,12 +112,12 @@ export function DoctorCard({ doctor, onBook }: DoctorCardProps) {
 
           {/* Right: Action Section */}
           <div className="p-5 md:p-6 sm:border-l border-slate-100 bg-slate-50/50 flex flex-col justify-center gap-3 sm:w-48 lg:w-56 shrink-0">
-            <Button 
+            <Button
               variant={doctor.available ? "emerald" : "outline"}
               className={cn(
                 "w-full h-11 sm:h-12 font-bold transition-all text-sm rounded-xl",
-                doctor.available 
-                  ? "shadow-lg shadow-emerald-100 hover:scale-[1.02] active:scale-[0.98]" 
+                doctor.available
+                  ? "shadow-lg shadow-emerald-100 hover:scale-[1.02] active:scale-[0.98]"
                   : "opacity-50 grayscale cursor-not-allowed bg-slate-100 text-slate-400 border-slate-200"
               )}
               disabled={!doctor.available}
@@ -126,8 +125,8 @@ export function DoctorCard({ doctor, onBook }: DoctorCardProps) {
             >
               {doctor.available ? 'Book Appointment' : 'Fully Booked'}
             </Button>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="w-full h-11 sm:h-12 font-bold rounded-xl bg-white text-slate-600 hover:text-[#0f172a] text-sm"
             >
               <Phone size={14} className="mr-2" />
