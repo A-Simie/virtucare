@@ -18,11 +18,11 @@ export default function LandingPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     // Simulate login and save user
     await new Promise(resolve => setTimeout(resolve, 1500));
     localStorage.setItem('virtucare_user_email', email);
-    
+
     addNotification({
       title: 'New Login Detected',
       message: `User ${email} successfully logged in to the portal.`,
@@ -79,7 +79,6 @@ export default function LandingPage() {
             </div>
             <div className="h-10 w-px bg-slate-800 mx-2" />
             <div>
-              <p className="text-base font-bold text-white">10k+ Professionals</p>
               <p className="text-[10px] font-medium text-slate-500 tracking-widest uppercase">Trusted Worldwide</p>
             </div>
           </div>
