@@ -9,7 +9,8 @@ import {
   Trash2, 
   Inbox,
   Clock,
-  Check
+  Check,
+  Printer
 } from 'lucide-react';
 import { formatDistanceToNow, format } from 'date-fns';
 import { cn } from '@/components/ui/Button';
@@ -31,6 +32,7 @@ export default function NotificationsPage() {
       case 'booking': return <Calendar className="text-emerald-500" size={24} />;
       case 'cancellation': return <Trash2 className="text-red-500" size={24} />;
       case 'system': return <Bell className="text-indigo-500" size={24} />;
+      case 'report': return <Printer className="text-amber-500" size={24} />;
       default: return <Bell size={24} />;
     }
   };

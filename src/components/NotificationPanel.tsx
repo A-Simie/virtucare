@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Bell, Calendar, Trash2, ChevronRight, Inbox } from 'lucide-react';
+import { X, Bell, Calendar, Trash2, ChevronRight, Inbox, Printer } from 'lucide-react';
 import { useNotifications, Notification } from '@/context/NotificationContext';
 import { cn } from '@/components/ui/Button';
 import { formatDistanceToNow } from 'date-fns';
@@ -20,6 +20,7 @@ export function NotificationPanel({ isOpen, onClose }: NotificationPanelProps) {
       case 'booking': return <Calendar className="text-emerald-500" size={18} />;
       case 'cancellation': return <Trash2 className="text-red-500" size={18} />;
       case 'system': return <Bell className="text-indigo-500" size={18} />;
+      case 'report': return <Printer className="text-amber-500" size={18} />;
       default: return <Bell size={18} />;
     }
   };

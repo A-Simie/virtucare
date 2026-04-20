@@ -47,7 +47,7 @@ export default function ReportsPage() {
     addNotification({
       title: 'Report Printed',
       message: 'A detailed clinical record has been generated and printed for your records.',
-      type: 'system'
+      type: 'report'
     });
 
     setIsPrinting(true);

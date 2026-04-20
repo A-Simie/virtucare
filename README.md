@@ -16,6 +16,9 @@ VirtuCare is a high-fidelity medical management platform engineered for clinical
     - **Interactive Health Trends**: High-fidelity SVG visualization suite featuring animated Line charts (Glucose/BP), Donut charts (Nutrition), and multicolored Bar charts (Activity).
     - **Diagnostic Record Generator**: Professional, PDF-optimized clinical report engine with intelligent page-break handling and personalized identification.
 - **🛡️ Global Notification System**: Real-time alerts for bookings, cancellations, and system events (e.g., report generation auditing).
+- **🔒 Session Guard & Persistence**: 
+    - **Automated Auth Redirect**: Integrated route protection that redirects unauthenticated users to the login portal if no session (email) is detected.
+    - **Persistent State**: Utilizes localized storage for maintaining user sessions, medical records, and notification history across page refreshes.
 - **🤝 Help & Legal Hub**: Integrated support center for Terms and Conditions, Privacy Policy, and 24/7 Patient Support.
 - **⚡ Performance-First UI**: 
     - **Skeleton Loading**: Zero layout shift architecture across all authenticated routes.

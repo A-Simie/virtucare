@@ -6,7 +6,7 @@ export interface Notification {
   id: string;
   title: string;
   message: string;
-  type: 'booking' | 'cancellation' | 'system';
+  type: 'booking' | 'cancellation' | 'system' | 'report';
   timestamp: string;
   read: boolean;
   link?: string;
