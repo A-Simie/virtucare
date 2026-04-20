@@ -60,10 +60,12 @@ export default function DashboardPage() {
         </div>
         
         <div className="flex flex-wrap gap-4 pt-2">
-          <Button variant="outline" className="rounded-2xl h-12 px-6 shadow-sm bg-white border-slate-200 hover:border-indigo-200 transition-colors">
-            <TrendingUp size={18} className="mr-2 text-indigo-600" />
-            View Clinical Reports
-          </Button>
+          <Link href="/reports">
+            <Button variant="outline" className="rounded-2xl h-12 px-6 shadow-sm bg-white border-slate-200 hover:border-indigo-200 transition-colors">
+              <TrendingUp size={18} className="mr-2 text-indigo-600" />
+              View Clinical Reports
+            </Button>
+          </Link>
           <Link href="/find-doctors">
             <Button variant="emerald" className="rounded-2xl h-12 font-bold shadow-lg shadow-emerald-100 px-8 hover:scale-[1.02] active:scale-[0.98] transition-all">
               Book New Appointment
