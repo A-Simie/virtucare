@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Calendar, Clock, ChevronRight, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Doctor } from '@/types/doctor';
@@ -26,6 +26,18 @@ export function BookingModal({ isOpen, onClose, doctor }: BookingModalProps) {
   const [success, setSuccess] = useState(false);
 
   const { bookAppointment } = useAppointments();
+
+  // Reset state when modal opens or doctor changes
+  useEffect(() => {
+    if (isOpen) {
+      setStep(1);
+      setSelectedDate(new Date());
+      setSelectedTime('');
+      setReason('');
+      setSuccess(false);
+      setError(null);
+    }
+  }, [isOpen, doctor.id]);
 
   const handleConfirm = async () => {
     setIsSubmitting(true);
