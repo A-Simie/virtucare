@@ -11,7 +11,8 @@ import {
   Activity,
   Menu,
   X,
-  Bell
+  Bell,
+  LogOut
 } from 'lucide-react';
 import { cn } from './ui/Button';
 import { Avatar } from './ui/Avatar';
@@ -25,10 +26,18 @@ const navItems = [
   { name: 'Settings', href: '/settings', icon: Settings },
 ];
 
+import { useRouter } from 'next/navigation';
+
 export function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const { unreadCount } = useNotifications();
+
+  const handleLogout = () => {
+    localStorage.removeItem('virtucare_user_email');
+    router.push('/');
+  };
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
@@ -80,14 +89,14 @@ export function Sidebar() {
         </ul>
       </nav>
 
-      <div className="p-4 border-t border-slate-800">
-        <div className="flex items-center gap-3 px-4 py-3 bg-[#1e293b] rounded-xl border border-slate-700/50">
-          <Avatar name="Dr. S. Chen" size="sm" className="border-slate-700" />
-          <div className="flex-1 overflow-hidden">
-            <p className="text-sm font-semibold truncate text-white">Dr. S. Chen</p>
-            <p className="text-[10px] text-slate-400 font-medium">Administrator</p>
-          </div>
-        </div>
+      <div className="p-6 border-t border-slate-800">
+        <button 
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 px-4 py-3 bg-red-500/10 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all group font-bold"
+        >
+          <LogOut size={20} />
+          <span>Sign Out</span>
+        </button>
       </div>
     </>
   );

@@ -39,9 +39,14 @@ export function useAppointments() {
     );
   };
 
+  const clearAppointments = () => {
+    setAppointments([]);
+  };
+
   return {
     appointments,
     bookAppointment,
     cancelAppointment,
+    clearAppointments,
   };
 }

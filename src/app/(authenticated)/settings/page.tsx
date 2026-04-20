@@ -17,6 +17,11 @@ import { Skeleton } from '@/components/ui/Skeleton';
 import { useEffect, useState } from 'react';
 import { UserNav } from '@/components/UserNav';
 
+import { useRouter } from 'next/navigation';
+import { ResetDataModal } from '@/components/ResetDataModal';
+import { useNotifications } from '@/context/NotificationContext';
+import { useAppointments } from '@/hooks/useAppointments';
+
 const settingsGroups = [
   {
     title: 'Account',
@@ -29,7 +34,6 @@ const settingsGroups = [
     title: 'Privacy & Data',
     items: [
       { name: 'Health Records Privacy', icon: Shield, description: 'Control who can view your medical history' },
-      { name: 'Data Management', icon: Database, description: 'Export or delete your medical data' },
       { name: 'Connected Apps', icon: Globe, description: 'Manage third-party health app integrations' },
     ]
   }
@@ -37,11 +41,27 @@ const settingsGroups = [
 
 export default function SettingsPage() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isResetModalOpen, setIsResetModalOpen] = useState(false);
+  const router = useRouter();
+  const { clearAll: clearNotifications } = useNotifications();
+  const { clearAppointments } = useAppointments();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 800);
     return () => clearTimeout(timer);
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('virtucare_user_email');
+    router.push('/');
+  };
+
+  const handleResetData = () => {
+    clearNotifications();
+    clearAppointments();
+    localStorage.clear();
+    router.push('/');
+  };
 
   return (
     <div className="max-w-7xl mx-auto space-y-10">
@@ -106,10 +126,34 @@ export default function SettingsPage() {
             </div>
           ))
         )}
+        
+        <div className="space-y-4 pt-6">
+          <h3 className="text-sm font-bold uppercase tracking-wider text-red-500 ml-1">
+            Danger Zone
+          </h3>
+          <Card className="overflow-hidden border-red-100 bg-red-50/30">
+            <button
+              onClick={() => setIsResetModalOpen(true)}
+              className="w-full flex items-center justify-between p-6 hover:bg-red-50 transition-colors text-left group"
+            >
+              <div className="flex items-center gap-4">
+                <div className="p-2.5 bg-red-100 rounded-xl text-red-600 group-hover:bg-white group-hover:shadow-sm transition-all">
+                  <Database size={20} />
+                </div>
+                <div>
+                  <p className="font-bold text-red-600">Reset All Local Data</p>
+                  <p className="text-xs text-red-400 mt-0.5">Wipe all appointments, notifications and preferences</p>
+                </div>
+              </div>
+              <ChevronRight size={18} className="text-red-200 group-hover:text-red-500 group-hover:translate-x-1 transition-all" />
+            </button>
+          </Card>
+        </div>
 
         <div className="pt-4">
           <Button
             variant="outline"
+            onClick={handleLogout}
             className="w-full h-14 rounded-2xl text-red-600 border-red-100 hover:bg-red-50 hover:border-red-200 font-bold gap-3"
           >
             <LogOut size={18} />
@@ -117,6 +161,12 @@ export default function SettingsPage() {
           </Button>
         </div>
       </div>
+
+      <ResetDataModal 
+        isOpen={isResetModalOpen} 
+        onClose={() => setIsResetModalOpen(false)} 
+        onConfirm={handleResetData}
+      />
     </div>
   );
 }
