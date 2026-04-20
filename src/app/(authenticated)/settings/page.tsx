@@ -64,12 +64,18 @@ export default function SettingsPage() {
 
   return (
     <div className="max-w-7xl mx-auto space-y-10">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-4xl font-extrabold tracking-tight text-[#0f172a]">Settings</h1>
-          <p className="text-slate-500 mt-2 text-lg">Manage your account preferences and security settings.</p>
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex-1 min-w-0">
+          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-[#0f172a] leading-tight break-all sm:break-normal">
+            Settings
+          </h1>
+          <p className="text-slate-500 mt-2 text-base md:text-lg">
+            Manage your account preferences and security settings.
+          </p>
         </div>
-        <UserNav />
+        <div className="flex items-center gap-3 shrink-0">
+          <UserNav />
+        </div>
       </div>
 
       <div className="space-y-6">

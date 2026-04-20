@@ -32,6 +32,7 @@ import { formatDate } from '@/utils/date-helpers';
 import Link from 'next/link';
 import { cn } from '@/components/ui/Button';
 import { useNotifications } from '@/context/NotificationContext';
+import { UserNav } from '@/components/UserNav';
 
 export default function ReportsPage() {
   const [isPrinting, setIsPrinting] = useState(false);
@@ -69,8 +70,8 @@ export default function ReportsPage() {
         }
       `}</style>
       {/* Header / Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 print:hidden">
-        <div>
+      <div className="flex items-start justify-between gap-6 print:hidden">
+        <div className="flex-1 min-w-0">
           <Link
             href="/dashboard"
             className="flex items-center gap-2 text-slate-500 hover:text-[#0f172a] font-bold text-sm mb-4 transition-colors group"
@@ -78,22 +79,36 @@ export default function ReportsPage() {
             <ChevronLeft size={16} className="group-hover:-translate-x-0.5 transition-transform" />
             Back to Dashboard
           </Link>
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-[#0f172a]">
+          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-[#0f172a] leading-tight break-all sm:break-normal">
             Clinical <span className="text-[#134e4a]">Reports</span>
           </h1>
-          <p className="text-slate-500 mt-2 font-medium">Comprehensive summary of your medical diagnostics and lab results.</p>
+          <p className="text-slate-500 mt-2 text-base md:text-lg font-medium leading-relaxed">
+            Comprehensive summary of your medical diagnostics and lab results.
+          </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           <Button
             variant="outline"
             onClick={handlePrint}
-            className="rounded-2xl border-slate-200 bg-white shadow-sm font-bold text-[#0f172a]"
+            className="rounded-2xl border-slate-200 bg-white shadow-sm font-bold text-[#0f172a] h-12 px-6 hidden sm:flex"
           >
             <Printer size={18} className="mr-2" />
             Print Report
           </Button>
-
+          <UserNav />
         </div>
+      </div>
+
+      {/* Mobile Print Button */}
+      <div className="sm:hidden no-print pb-4">
+        <Button
+          variant="outline"
+          onClick={handlePrint}
+          className="w-full rounded-2xl border-slate-200 bg-white shadow-sm font-bold text-[#0f172a] h-12"
+        >
+          <Printer size={18} className="mr-2" />
+          Print Report
+        </Button>
       </div>
 
       {/* Print Header (Visible only when printing) */}
