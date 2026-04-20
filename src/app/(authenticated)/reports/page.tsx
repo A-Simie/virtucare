@@ -31,10 +31,12 @@ import {
 import { formatDate } from '@/utils/date-helpers';
 import Link from 'next/link';
 import { cn } from '@/components/ui/Button';
+import { useNotifications } from '@/context/NotificationContext';
 
 export default function ReportsPage() {
   const [isPrinting, setIsPrinting] = useState(false);
   const [userEmail, setUserEmail] = useState('Patient');
+  const { addNotification } = useNotifications();
 
   useEffect(() => {
     const savedEmail = localStorage.getItem('virtucare_user_email');
@@ -42,6 +44,12 @@ export default function ReportsPage() {
   }, []);
 
   const handlePrint = () => {
+    addNotification({
+      title: 'Report Printed',
+      message: 'A detailed clinical record has been generated and printed for your records.',
+      type: 'system'
+    });
+
     setIsPrinting(true);
     setTimeout(() => {
       window.print();
