@@ -66,6 +66,7 @@ export function BookingModal({ isOpen, onClose, doctor }: BookingModalProps) {
       doctorId: doctor.id,
       doctorName: doctor.name,
       doctorSpecialty: doctor.specialty,
+      doctorAvatar: doctor.avatar,
       date: selectedDate.toISOString(),
       time: selectedTime,
       reason,

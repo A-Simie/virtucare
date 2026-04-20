@@ -12,7 +12,13 @@ import {
   AlertTriangle,
   ChevronLeft,
   ChevronRight,
-  ChevronDown
+  ChevronDown,
+  Search,
+  Filter,
+  X,
+  Calendar,
+  SearchX,
+  Eye
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Skeleton } from '@/components/ui/Skeleton';
@@ -20,7 +26,6 @@ import { Avatar } from '@/components/ui/Avatar';
 import { useNotifications } from '@/context/NotificationContext';
 import { AppointmentDetailsModal } from '@/components/AppointmentDetailsModal';
 import { Appointment } from '@/types/appointment';
-import { Eye } from 'lucide-react';
 
 export function AppointmentTable() {
   const { appointments, cancelAppointment } = useAppointments();
@@ -34,6 +39,11 @@ export function AppointmentTable() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [isPerPageOpen, setIsPerPageOpen] = useState(false);
+
+  // Filter State
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'upcoming' | 'cancelled'>('all');
+  const [dateFilter, setDateFilter] = useState('');
 
   const menuRef = useRef<HTMLDivElement>(null);
   const perPageRef = useRef<HTMLDivElement>(null);
@@ -57,7 +67,20 @@ export function AppointmentTable() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const sortedAppointments = [...appointments].sort((a, b) =>
+  const filteredAppointments = appointments.filter((app) => {
+    const matchesSearch =
+      app.doctorName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      app.doctorSpecialty.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      app.reason.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesStatus = statusFilter === 'all' || app.status === statusFilter;
+
+    const matchesDate = !dateFilter || app.date.startsWith(dateFilter);
+
+    return matchesSearch && matchesStatus && matchesDate;
+  });
+
+  const sortedAppointments = [...filteredAppointments].sort((a, b) =>
     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 
@@ -65,6 +88,11 @@ export function AppointmentTable() {
   const totalPages = Math.ceil(sortedAppointments.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedAppointments = sortedAppointments.slice(startIndex, startIndex + itemsPerPage);
+
+  // Reset page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, statusFilter, dateFilter]);
 
   const handleConfirmCancel = () => {
     if (confirmCancelId) {
@@ -76,6 +104,14 @@ export function AppointmentTable() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const hasActiveFilters = searchQuery !== '' || statusFilter !== 'all' || dateFilter !== '';
+
+  const clearFilters = () => {
+    setSearchQuery('');
+    setStatusFilter('all');
+    setDateFilter('');
   };
 
   if (!isLoading && appointments.length === 0) {
@@ -97,6 +133,69 @@ export function AppointmentTable() {
 
   return (
     <div className="space-y-6 relative pb-20">
+      {/* Filter Bar */}
+      <Card className="border-slate-200 shadow-sm overflow-visible bg-white/50 backdrop-blur-sm sticky top-0 z-40">
+        <CardContent className="p-4">
+          <div className="flex flex-col xl:flex-row gap-4">
+            {/* Search */}
+            <div className="flex-1 relative group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#2dd4bf] transition-colors" size={18} />
+              <input
+                type="text"
+                placeholder="Search appointments by doctor, specialty or reason..."
+                className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#2dd4bf]/20 focus:border-[#2dd4bf] transition-all text-sm font-medium"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              {/* Status Filter */}
+              <div className="flex items-center bg-slate-50 p-1 rounded-2xl border border-slate-100">
+                {(['all', 'upcoming', 'cancelled'] as const).map((status) => (
+                  <button
+                    key={status}
+                    onClick={() => setStatusFilter(status)}
+                    className={cn(
+                      "px-4 py-2 text-xs font-bold rounded-xl transition-all capitalize",
+                      statusFilter === status
+                        ? "bg-white text-[#0f172a] shadow-sm"
+                        : "text-slate-400 hover:text-slate-600"
+                    )}
+                  >
+                    {status}
+                  </button>
+                ))}
+              </div>
+
+              {/* Date Filter */}
+              <div className="relative group">
+                <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#2dd4bf] pointer-events-none" size={16} />
+                <input
+                  type="date"
+                  className="pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#2dd4bf]/20 focus:border-[#2dd4bf] transition-all text-xs font-bold text-slate-600 cursor-pointer"
+                  value={dateFilter}
+                  onChange={(e) => setDateFilter(e.target.value)}
+                />
+              </div>
+
+              {/* Clear Filters */}
+              {hasActiveFilters && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={clearFilters}
+                  className="text-xs font-bold text-red-500 hover:text-red-600 hover:bg-red-50 rounded-xl gap-2"
+                >
+                  <X size={14} />
+                  Clear
+                </Button>
+              )}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       <div className="space-y-4">
         <AnimatePresence mode="popLayout">
           {isLoading ? (
@@ -122,7 +221,7 @@ export function AppointmentTable() {
                 </CardContent>
               </Card>
             ))
-          ) : (
+          ) : paginatedAppointments.length > 0 ? (
             paginatedAppointments.map((app) => (
               <motion.div
                 key={app.id}
@@ -131,17 +230,20 @@ export function AppointmentTable() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 layout
               >
-                <Card className={app.status === 'cancelled' ? 'opacity-60 bg-slate-50 grayscale-[0.5]' : 'hover:shadow-lg transition-shadow border-slate-100'}>
+                <Card className={app.status === 'cancelled' ? 'opacity-980 bg-red-50/10 grayscale-[0.5] border-red-300/50' : 'hover:shadow-lg transition-shadow border-slate-100'}>
                   <CardContent className="p-6">
                     <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
                       {/* Column 1: Doctor */}
                       <div className="flex items-center gap-5 w-full lg:w-[30%]">
-                        <div className={cn(
-                          "w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center font-bold text-lg shrink-0",
-                          app.status === 'cancelled' ? "bg-slate-200 text-slate-500" : "bg-[#ecfdf5] text-[#134e4a]"
-                        )}>
-                          {app.doctorName.split(' ').map(n => n[0]).join('')}
-                        </div>
+                        <Avatar 
+                          src={app.doctorAvatar} 
+                          name={app.doctorName} 
+                          size="md" 
+                          className={cn(
+                            "w-12 h-12 md:w-14 md:h-14 shrink-0",
+                            app.status === 'cancelled' && "grayscale opacity-70"
+                          )} 
+                        />
                         <div className="truncate">
                           <h4 className="font-bold text-[#0f172a] text-base md:text-lg truncate">{app.doctorName}</h4>
                           <p className="text-xs md:text-sm text-slate-500 font-medium truncate">{app.doctorSpecialty}</p>
@@ -203,7 +305,7 @@ export function AppointmentTable() {
                                   <Eye size={16} className="text-slate-400" />
                                   View Details
                                 </button>
-                                
+
                                 {app.status === 'upcoming' && (
                                   <button
                                     onClick={() => {
@@ -213,7 +315,7 @@ export function AppointmentTable() {
                                     className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-red-600 hover:bg-red-50 rounded-xl transition-colors text-left"
                                   >
                                     <XCircle size={16} />
-                                    Cancel Appointment
+                                    Cancel
                                   </button>
                                 )}
                               </div>
@@ -226,6 +328,27 @@ export function AppointmentTable() {
                 </Card>
               </motion.div>
             ))
+          ) : (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-20 bg-white rounded-[32px] border border-dashed border-slate-200"
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-slate-50 rounded-full mb-4">
+                <SearchX className="text-slate-300" size={32} />
+              </div>
+              <h4 className="text-lg font-bold text-[#0f172a]">No matches found</h4>
+              <p className="text-sm text-slate-500 mt-1 max-w-xs mx-auto">
+                We couldn't find any appointments matching your current search or filter criteria.
+              </p>
+              <Button
+                variant="ghost"
+                onClick={clearFilters}
+                className="mt-6 text-[#134e4a] font-bold hover:bg-slate-50 rounded-xl"
+              >
+                Clear all filters
+              </Button>
+            </motion.div>
           )}
         </AnimatePresence>
       </div>

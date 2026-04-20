@@ -11,5 +11,6 @@ export interface Appointment {
   time: string; // HH:mm format or ISO
   reason: string;
   status: AppointmentStatus;
+  doctorAvatar: string;
   createdAt: string;
 }

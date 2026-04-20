@@ -70,9 +70,15 @@ export function AppointmentDetailsModal({ isOpen, onClose, appointment }: Appoin
         <div className="p-6 md:p-8 pr-4 md:pr-6 space-y-8 overflow-y-auto max-h-[70vh] custom-scrollbar">
           {/* Doctor Info Card */}
           <div className="flex items-center gap-5 p-6 bg-slate-50 rounded-3xl border border-slate-100">
-            <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center shadow-sm border border-slate-200 overflow-hidden shrink-0">
-              <span className="text-2xl font-black text-[#0f172a]">{appointment.doctorName[0]}</span>
-            </div>
+            <Avatar 
+              src={appointment.doctorAvatar} 
+              name={appointment.doctorName} 
+              size="lg" 
+              className={cn(
+                "w-16 h-16 rounded-2xl shadow-sm border border-slate-200 shrink-0",
+                isCancelled && "grayscale opacity-70"
+              )} 
+            />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <Badge variant="outline" className="bg-white border-slate-200 text-slate-500 text-[10px] uppercase font-bold">
