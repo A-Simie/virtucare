@@ -6,17 +6,29 @@ import { Activity, Mail, Lock, ChevronRight, Globe, Shield } from 'lucide-react'
 import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
 
+import { useNotifications } from '@/context/NotificationContext';
+
 export default function LandingPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const { addNotification } = useNotifications();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    // Simulate login
+    
+    // Simulate login and save user
     await new Promise(resolve => setTimeout(resolve, 1500));
+    localStorage.setItem('virtucare_user_email', email);
+    
+    addNotification({
+      title: 'New Login Detected',
+      message: `User ${email} successfully logged in to the portal.`,
+      type: 'system',
+    });
+
     router.push('/dashboard');
   };
 

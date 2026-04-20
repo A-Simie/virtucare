@@ -22,9 +22,12 @@ import { UserNav } from '@/components/UserNav';
 export default function DashboardPage() {
   const { appointments } = useAppointments();
   const [isLoading, setIsLoading] = useState(true);
+  const [userEmail, setUserEmail] = useState('Dr. Chen');
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
+    const savedEmail = localStorage.getItem('virtucare_user_email');
+    if (savedEmail) setUserEmail(savedEmail);
     return () => clearTimeout(timer);
   }, []);
 
@@ -44,9 +47,11 @@ export default function DashboardPage() {
     <div className="max-w-7xl mx-auto space-y-10">
       {/* Welcome Section */}
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-4xl font-extrabold tracking-tight text-[#0f172a]">Hello, Dr. Chen</h1>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div className="max-w-full overflow-hidden">
+            <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-[#0f172a] break-all sm:break-normal">
+              Hello, <span className="text-[#134e4a]">{userEmail}</span>
+            </h1>
             <p className="text-slate-500 mt-2 text-lg">Welcome back to your VirtuCare dashboard. You have {upcomingCount} appointments today.</p>
           </div>
           <UserNav />

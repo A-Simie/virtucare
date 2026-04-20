@@ -28,8 +28,8 @@ export function DoctorList() {
   const specialties = ['All', 'Cardiology', 'Dermatology', 'Neurology', 'Pediatrics', 'General Practice'];
 
   const filteredDoctors = doctors.filter(doc => {
-    const matchesSearch = doc.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          doc.specialty.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = doc.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      doc.specialty.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesSpecialty = selectedSpecialty === 'All' || doc.specialty === selectedSpecialty;
     return matchesSearch && matchesSpecialty;
   });
@@ -44,9 +44,9 @@ export function DoctorList() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
         <div className="relative w-full max-w-2xl">
           <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400" size={22} />
-          <input 
-            type="text" 
-            placeholder="Search by specialist name, medical specialty, or clinic location..."
+          <input
+            type="text"
+            placeholder="Search by specialist name or medical specialty..."
             className="w-full pl-14 pr-6 py-5 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-[#2dd4bf]/10 focus:border-[#2dd4bf] transition-all shadow-sm text-lg placeholder:text-slate-400"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -63,11 +63,10 @@ export function DoctorList() {
           <button
             key={specialty}
             onClick={() => setSelectedSpecialty(specialty)}
-            className={`px-6 py-3 rounded-2xl text-sm font-bold transition-all duration-300 whitespace-nowrap ${
-              selectedSpecialty === specialty 
-                ? 'bg-[#0f172a] text-white shadow-xl shadow-slate-200 scale-105' 
-                : 'bg-white text-slate-500 border border-slate-200 hover:border-[#2dd4bf] hover:text-[#0f172a] shadow-sm'
-            }`}
+            className={`px-6 py-3 rounded-2xl text-sm font-bold transition-all duration-300 whitespace-nowrap ${selectedSpecialty === specialty
+              ? 'bg-[#0f172a] text-white shadow-xl shadow-slate-200 scale-105'
+              : 'bg-white text-slate-500 border border-slate-200 hover:border-[#2dd4bf] hover:text-[#0f172a] shadow-sm'
+              }`}
           >
             {specialty}
           </button>
@@ -118,10 +117,10 @@ export function DoctorList() {
       )}
 
       {selectedDoctor && (
-        <BookingModal 
-          isOpen={isBookingOpen} 
-          onClose={() => setIsBookingOpen(false)} 
-          doctor={selectedDoctor} 
+        <BookingModal
+          isOpen={isBookingOpen}
+          onClose={() => setIsBookingOpen(false)}
+          doctor={selectedDoctor}
         />
       )}
     </div>
