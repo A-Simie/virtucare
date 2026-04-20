@@ -39,12 +39,13 @@ export function DoctorCard({ doctor, onBook }: DoctorCardProps) {
       <CardContent className="p-0">
         <div className="flex flex-col sm:flex-row">
           {/* Left: Avatar Section */}
-          <div className="relative w-full sm:w-56 h-64 sm:h-auto bg-slate-50 overflow-hidden shrink-0">
+          <div className="relative w-full sm:w-56 aspect-[4/5] sm:aspect-auto sm:h-auto bg-slate-50 overflow-hidden shrink-0">
             <img 
               src={doctor.avatar} 
               alt={doctor.name} 
-              className="w-full h-full object-cover object-top sm:object-center transition-transform duration-500 group-hover:scale-110"
+              className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
             />
+
 
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg border border-white shadow-sm flex items-center gap-1 opacity-0 sm:group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">

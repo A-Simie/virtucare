@@ -15,7 +15,7 @@ import {
 import { cn } from './ui/Button';
 
 const navItems = [
-  { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+  { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Find Doctors', href: '/find-doctors', icon: Search },
   { name: 'My Appointments', href: '/appointments', icon: CalendarDays },
   { name: 'Settings', href: '/settings', icon: Settings },
