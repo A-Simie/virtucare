@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { Bell, HelpCircle } from 'lucide-react';
 import { Avatar } from '@/components/ui/Avatar';

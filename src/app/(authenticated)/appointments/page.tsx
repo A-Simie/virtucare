@@ -1,3 +1,5 @@
+'use client';
+
 import { AppointmentTable } from '@/features/appointments/AppointmentTable';
 import { UserNav } from '@/components/UserNav';
 

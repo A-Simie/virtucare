@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useRef, useEffect } from 'react';
 import { useAppointments } from '@/hooks/useAppointments';
 import { Card, CardContent } from '@/components/ui/Card';
