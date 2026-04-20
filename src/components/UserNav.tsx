@@ -10,26 +10,27 @@ export function UserNav() {
 
   return (
     <>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1.5 sm:gap-3">
         <button
           onClick={() => setIsPanelOpen(true)}
-          className="p-2.5 text-slate-400 hover:text-[#0f172a] hover:bg-white rounded-2xl transition-all border border-transparent hover:border-slate-200 shadow-sm group relative"
+          className="p-2 sm:p-2.5 text-slate-400 hover:text-[#0f172a] hover:bg-white rounded-2xl transition-all border border-transparent hover:border-slate-200 shadow-sm group relative"
         >
-          <Bell size={20} className="group-hover:scale-110 transition-transform" />
+          <Bell size={18} className="sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
           {unreadCount > 0 && (
-            <span className="absolute top-2 right-2 w-4 h-4 bg-red-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">
+            <span className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 w-3.5 h-3.5 sm:w-4 sm:h-4 bg-red-500 text-white text-[9px] sm:text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">
               {unreadCount > 9 ? '9+' : unreadCount}
             </span>
           )}
         </button>
-        <button className="p-2.5 text-slate-400 hover:text-[#0f172a] hover:bg-white rounded-2xl transition-all border border-transparent hover:border-slate-200 shadow-sm group">
+        <button className="hidden sm:flex p-2.5 text-slate-400 hover:text-[#0f172a] hover:bg-white rounded-2xl transition-all border border-transparent hover:border-slate-200 shadow-sm group">
           <HelpCircle size={20} className="group-hover:scale-110 transition-transform" />
         </button>
-        <div className="ml-1">
+        <div className="ml-0.5 sm:ml-1">
           <Avatar
             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
             name="Dr. S. Chen"
             size="sm"
+            className="w-8 h-8 sm:w-10 sm:h-10"
           />
         </div>
       </div>
