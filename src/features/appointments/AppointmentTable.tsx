@@ -19,12 +19,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { Avatar } from '@/components/ui/Avatar';
 import { useNotifications } from '@/context/NotificationContext';
+import { AppointmentDetailsModal } from '@/components/AppointmentDetailsModal';
+import { Appointment } from '@/types/appointment';
+import { Eye } from 'lucide-react';
 
 export function AppointmentTable() {
   const { appointments, cancelAppointment } = useAppointments();
   const { addNotification } = useNotifications();
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const [confirmCancelId, setConfirmCancelId] = useState<string | null>(null);
+  const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // Pagination State
@@ -189,8 +193,19 @@ export function AppointmentTable() {
                               ref={menuRef}
                               className="absolute right-0 top-full mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-slate-100 z-50 overflow-hidden"
                             >
-                              <div className="p-2">
-                                {app.status === 'upcoming' ? (
+                              <div className="p-2 space-y-1">
+                                <button
+                                  onClick={() => {
+                                    setSelectedAppointment(app);
+                                    setOpenMenuId(null);
+                                  }}
+                                  className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-[#0f172a] hover:bg-slate-50 rounded-xl transition-colors text-left"
+                                >
+                                  <Eye size={16} className="text-slate-400" />
+                                  View Details
+                                </button>
+                                
+                                {app.status === 'upcoming' && (
                                   <button
                                     onClick={() => {
                                       setConfirmCancelId(app.id);
@@ -201,8 +216,6 @@ export function AppointmentTable() {
                                     <XCircle size={16} />
                                     Cancel Appointment
                                   </button>
-                                ) : (
-                                  <div className="px-4 py-3 text-sm text-slate-400 italic font-medium">No actions available</div>
                                 )}
                               </div>
                             </motion.div>
@@ -363,6 +376,11 @@ export function AppointmentTable() {
           </div>
         )}
       </AnimatePresence>
+      <AppointmentDetailsModal
+        isOpen={!!selectedAppointment}
+        onClose={() => setSelectedAppointment(null)}
+        appointment={selectedAppointment}
+      />
     </div>
   );
 }
