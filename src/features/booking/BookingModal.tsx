@@ -7,8 +7,25 @@ import { Doctor } from '@/types/doctor';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { useAppointments } from '@/hooks/useAppointments';
-import { format, addDays, startOfDay, parseISO } from 'date-fns';
+import { 
+  format, 
+  addDays, 
+  startOfDay, 
+  parseISO, 
+  startOfMonth, 
+  endOfMonth, 
+  eachDayOfInterval, 
+  isToday, 
+  isPast, 
+  isBefore, 
+  addMonths, 
+  subMonths,
+  isAfter,
+  setHours,
+  setMinutes
+} from 'date-fns';
 import { Avatar } from '@/components/ui/Avatar';
+import { ChevronLeft } from 'lucide-react';
 
 import { useNotifications } from '@/context/NotificationContext';
 
@@ -20,6 +37,7 @@ interface BookingModalProps {
 
 export function BookingModal({ isOpen, onClose, doctor }: BookingModalProps) {
   const [step, setStep] = useState(1);
+  const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [reason, setReason] = useState('');
@@ -76,7 +94,28 @@ export function BookingModal({ isOpen, onClose, doctor }: BookingModalProps) {
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
 
-  const dates = Array.from({ length: 7 }, (_, i) => addDays(new Date(), i));
+  const handlePrevMonth = () => setCurrentMonth(prev => subMonths(prev, 1));
+  const handleNextMonth = () => setCurrentMonth(prev => addMonths(prev, 1));
+
+  // Date Filtering Logic
+  const monthStart = startOfMonth(currentMonth);
+  const monthEnd = endOfMonth(currentMonth);
+  const allDaysInMonth = eachDayOfInterval({ start: monthStart, end: monthEnd });
+
+  const isDateAvailable = (date: Date) => {
+    const today = startOfDay(new Date());
+    if (isBefore(startOfDay(date), today)) return false;
+
+    if (isToday(date)) {
+      const now = new Date();
+      const cutoffTime = setMinutes(setHours(startOfDay(now), 15), 0); // 3:00 PM
+      if (isAfter(now, cutoffTime)) return false;
+    }
+
+    return true;
+  };
+
+  const dates = allDaysInMonth.filter(isDateAvailable);
   const times = ['09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '01:00 PM', '02:00 PM', '03:00 PM'];
 
   if (!isOpen) return null;
@@ -114,11 +153,32 @@ export function BookingModal({ isOpen, onClose, doctor }: BookingModalProps) {
         <div className="flex-1 overflow-y-auto p-6 space-y-8">
           {step === 1 && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-              <div>
-                <h4 className="text-lg font-bold text-[#0f172a] mb-4 flex items-center gap-2">
-                  <Calendar size={18} className="text-[#134e4a]" />
-                  Select Date
-                </h4>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-lg font-bold text-[#0f172a] flex items-center gap-2">
+                    <Calendar size={18} className="text-[#134e4a]" />
+                    Select Date
+                  </h4>
+                  <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-xl border border-slate-100">
+                    <button 
+                      onClick={handlePrevMonth}
+                      disabled={isBefore(startOfMonth(currentMonth), startOfMonth(new Date()))}
+                      className="p-1.5 hover:bg-white hover:shadow-sm rounded-lg text-slate-400 disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:shadow-none transition-all"
+                    >
+                      <ChevronLeft size={16} />
+                    </button>
+                    <span className="text-[10px] font-black uppercase tracking-widest px-2 text-[#0f172a]">
+                      {format(currentMonth, 'MMM yyyy')}
+                    </span>
+                    <button 
+                      onClick={handleNextMonth}
+                      className="p-1.5 hover:bg-white hover:shadow-sm rounded-lg text-slate-400 transition-all"
+                    >
+                      <ChevronRight size={16} />
+                    </button>
+                  </div>
+                </div>
+                
                 <div className="grid grid-cols-4 gap-2">
                   {dates.map((date) => (
                     <button
@@ -127,13 +187,18 @@ export function BookingModal({ isOpen, onClose, doctor }: BookingModalProps) {
                       className={`p-3 rounded-xl border text-center transition-all ${
                         format(selectedDate, 'yyyy-MM-dd') === format(date, 'yyyy-MM-dd')
                           ? 'border-[#2dd4bf] bg-[#ecfdf5] text-[#0f172a] font-bold shadow-sm'
-                          : 'border-slate-100 hover:border-slate-300 text-slate-500'
+                          : 'border-slate-50 hover:border-slate-200 text-slate-500 bg-white'
                       }`}
                     >
                       <span className="block text-[10px] uppercase tracking-wider mb-1 font-semibold">{format(date, 'EEE')}</span>
                       <span className="text-sm">{format(date, 'd')}</span>
                     </button>
                   ))}
+                  {dates.length === 0 && (
+                    <div className="col-span-4 py-8 text-center bg-slate-50 rounded-2xl border border-dashed border-slate-200">
+                      <p className="text-xs text-slate-400 font-medium">No available slots this month</p>
+                    </div>
+                  )}
                 </div>
               </div>
 
