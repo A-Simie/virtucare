@@ -14,6 +14,8 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { formatDate } from '@/utils/date-helpers';
+import { cn } from '@/components/ui/Button';
+import { Avatar } from '@/components/ui/Avatar';
 
 import { Skeleton } from '@/components/ui/Skeleton';
 import { useEffect, useState } from 'react';
@@ -97,7 +99,7 @@ export default function DashboardPage() {
                   </div>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{stat.name}</p>
+                  <p className="text-xs font-bold text-slate-400 tracking-wider">{stat.name}</p>
                   <p className="text-3xl font-extrabold text-[#0f172a]">{stat.value}</p>
                 </div>
               </CardContent>
@@ -134,15 +136,29 @@ export default function DashboardPage() {
               ))
             ) : recentAppointments.length > 0 ? (
               recentAppointments.map((app) => (
-                <Card key={app.id} className="hover:border-[#2dd4bf] cursor-pointer group transition-all shadow-sm">
+                <Card 
+                  key={app.id} 
+                  className={cn(
+                    "cursor-pointer group transition-all shadow-sm",
+                    app.status === 'cancelled' 
+                      ? "bg-red-50 grayscale-[0.5] border-red-300/50 opacity-80" 
+                      : "hover:border-[#2dd4bf] border-slate-100"
+                  )}
+                >
                   <CardContent className="p-5 flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center font-bold text-slate-600 group-hover:bg-[#ecfdf5] group-hover:text-[#134e4a] transition-colors">
-                        {app.doctorName.split(' ').map(n => n[0]).join('')}
-                      </div>
+                      <Avatar 
+                        src={app.doctorAvatar} 
+                        name={app.doctorName} 
+                        size="sm" 
+                        className={cn(
+                          "w-12 h-12 rounded-xl shrink-0",
+                          app.status === 'cancelled' && "grayscale opacity-70"
+                        )} 
+                      />
                       <div>
                         <p className="font-bold text-[#0f172a] group-hover:text-[#134e4a] transition-colors">{app.doctorName}</p>
-                        <p className="text-xs text-slate-500 font-medium">{app.doctorSpecialty} • {formatDate(app.date)}</p>
+                        <p className="text-sm text-slate-500 font-medium">{app.doctorSpecialty} • {formatDate(app.date)}</p>
                       </div>
                     </div>
                     <Badge variant={app.status === 'upcoming' ? 'success' : 'default'} className="capitalize">
@@ -193,7 +209,7 @@ function Badge({ children, className, variant = 'default' }: any) {
     success: 'bg-emerald-100 text-emerald-600',
   };
   return (
-    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${variants[variant]} ${className}`}>
+    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider ${variants[variant]} ${className}`}>
       {children}
     </span>
   );

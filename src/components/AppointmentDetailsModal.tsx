@@ -81,11 +81,11 @@ export function AppointmentDetailsModal({ isOpen, onClose, appointment }: Appoin
             />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
-                <Badge variant="outline" className="bg-white border-slate-200 text-slate-500 text-[10px] uppercase font-bold">
+                <Badge variant="outline" className="bg-white border-slate-200 text-slate-500 text-[10px] font-bold">
                   Consultant
                 </Badge>
                 {isUpcoming && (
-                  <Badge variant="success" className="text-[10px] uppercase font-bold">Confirmed</Badge>
+                  <Badge variant="success" className="text-[10px] font-bold">Confirmed</Badge>
                 )}
               </div>
               <h4 className="text-lg font-black text-[#0f172a] truncate">{appointment.doctorName}</h4>
@@ -96,13 +96,13 @@ export function AppointmentDetailsModal({ isOpen, onClose, appointment }: Appoin
           {/* Details Grid */}
           <div className="grid grid-cols-2 gap-4">
             <div className="p-4 bg-slate-50/50 rounded-2xl border border-slate-100 space-y-1">
-              <span className="flex items-center gap-1.5 text-[10px] uppercase font-bold text-slate-400 tracking-widest">
+              <span className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 tracking-widest">
                 <Clock size={12} /> Time Slot
               </span>
               <p className="text-sm font-bold text-[#0f172a]">{appointment.time}</p>
             </div>
             <div className="p-4 bg-slate-50/50 rounded-2xl border border-slate-100 space-y-1">
-              <span className="flex items-center gap-1.5 text-[10px] uppercase font-bold text-slate-400 tracking-widest">
+              <span className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 tracking-widest">
                 <Calendar size={12} /> Date
               </span>
               <p className="text-sm font-bold text-[#0f172a]">{format(new Date(appointment.date), 'MMMM do, yyyy')}</p>
@@ -111,7 +111,7 @@ export function AppointmentDetailsModal({ isOpen, onClose, appointment }: Appoin
 
           {/* Reason Section */}
           <div className="space-y-3">
-            <span className="flex items-center gap-2 text-[10px] uppercase font-bold text-slate-400 tracking-widest px-1">
+            <span className="flex items-center gap-2 text-[10px] font-bold text-slate-400 tracking-widest px-1">
               <FileText size={14} /> Reason for Consultation
             </span>
             <div className="p-5 bg-white border border-slate-100 rounded-3xl text-sm text-slate-600 leading-relaxed italic">
@@ -124,7 +124,7 @@ export function AppointmentDetailsModal({ isOpen, onClose, appointment }: Appoin
             <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-100 rounded-2xl text-red-600">
               <XCircle className="shrink-0 mt-0.5" size={18} />
               <div className="space-y-1">
-                <p className="text-xs font-bold uppercase">Appointment Cancelled</p>
+                <p className="text-xs font-bold">Appointment Cancelled</p>
                 <p className="text-xs font-medium opacity-80">This session has been removed from the clinical schedule and is no longer active.</p>
               </div>
             </div>

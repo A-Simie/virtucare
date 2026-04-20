@@ -98,25 +98,27 @@ export function NotificationPanel({ isOpen, onClose }: NotificationPanelProps) {
                         : "bg-emerald-50/30 border-emerald-100 shadow-sm hover:shadow-md"
                     )}
                   >
-                    {!notif.read && (
-                      <div className="absolute top-4 right-4 w-2 h-2 bg-[#2dd4bf] rounded-full shadow-[0_0_8px_#2dd4bf]" />
-                    )}
                     <div className="flex gap-4">
-                      <div className="p-3 bg-white rounded-xl shadow-sm h-fit">
-                        {getIcon(notif.type)}
+                      <div className="relative shrink-0">
+                        <div className="p-3 bg-white rounded-xl shadow-sm border border-slate-50">
+                          {getIcon(notif.type)}
+                        </div>
+                        {!notif.read && (
+                          <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#2dd4bf] rounded-full border-2 border-white shadow-sm" />
+                        )}
                       </div>
-                      <div className="flex-1 space-y-1">
-                        <div className="flex items-center justify-between">
-                          <p className="text-sm font-bold text-[#0f172a]">{notif.title}</p>
-                          <span className="text-[10px] font-medium text-slate-400">
-                            {formatDistanceToNow(new Date(notif.timestamp), { addSuffix: true })}
+                      <div className="flex-1 min-w-0 space-y-1">
+                        <div className="flex items-center justify-between gap-2">
+                          <p className="text-sm font-bold text-[#0f172a] truncate">{notif.title}</p>
+                          <span className="text-[10px] font-bold text-slate-400 whitespace-nowrap bg-slate-50 px-2 py-0.5 rounded-full tracking-tight">
+                            {formatDistanceToNow(new Date(notif.timestamp), { addSuffix: true }).replace('less than a minute ago', 'just now')}
                           </span>
                         </div>
-                        <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
+                        <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
                           {notif.message}
                         </p>
-                        <div className="pt-2 flex items-center gap-1 text-[10px] font-bold text-[#134e4a] group-hover:text-[#2dd4bf] transition-colors">
-                          Read more <ChevronRight size={10} />
+                        <div className="pt-1 flex items-center gap-1.5 text-[10px] font-bold text-[#134e4a] group-hover:text-[#2dd4bf] transition-colors">
+                          View details <ChevronRight size={12} className="transition-transform group-hover:translate-x-0.5" />
                         </div>
                       </div>
                     </div>

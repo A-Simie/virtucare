@@ -230,19 +230,19 @@ export function AppointmentTable() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 layout
               >
-                <Card className={app.status === 'cancelled' ? 'opacity-980 bg-red-50/10 grayscale-[0.5] border-red-300/50' : 'hover:shadow-lg transition-shadow border-slate-100'}>
+                <Card className={app.status === 'cancelled' ? 'opacity-980 bg-red-50 grayscale-[0.5] border-red-300/50' : 'hover:shadow-lg transition-shadow border-slate-100'}>
                   <CardContent className="p-6">
                     <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
                       {/* Column 1: Doctor */}
                       <div className="flex items-center gap-5 w-full lg:w-[30%]">
-                        <Avatar 
-                          src={app.doctorAvatar} 
-                          name={app.doctorName} 
-                          size="md" 
+                        <Avatar
+                          src={app.doctorAvatar}
+                          name={app.doctorName}
+                          size="md"
                           className={cn(
                             "w-12 h-12 md:w-14 md:h-14 shrink-0",
                             app.status === 'cancelled' && "grayscale opacity-70"
-                          )} 
+                          )}
                         />
                         <div className="truncate">
                           <h4 className="font-bold text-[#0f172a] text-base md:text-lg truncate">{app.doctorName}</h4>
@@ -253,21 +253,21 @@ export function AppointmentTable() {
                       {/* Column 2, 3, 4: Details */}
                       <div className="grid grid-cols-1 sm:grid-cols-3 lg:flex lg:flex-1 gap-4 md:gap-8 text-sm w-full lg:w-auto">
                         <div className="flex flex-col gap-1 lg:w-[35%]">
-                          <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Date & Time</span>
+                          <span className="text-[10px] tracking-wider text-slate-400 font-bold">Date & Time</span>
                           <div className="flex items-center gap-2 font-semibold text-[#0f172a]">
                             <CalendarDays size={14} className="text-slate-400 shrink-0" />
                             <span className="truncate">{formatDate(app.date)} <span className="text-slate-300">|</span> {app.time}</span>
                           </div>
                         </div>
                         <div className="flex flex-col gap-1 lg:w-[40%]">
-                          <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Reason</span>
+                          <span className="text-[10px] tracking-wider text-slate-400 font-bold">Reason</span>
                           <div className="flex items-center gap-2 font-medium text-slate-600 truncate">
                             <MessageSquare size={14} className="text-slate-400 shrink-0" />
                             <span className="truncate" title={app.reason}>{app.reason}</span>
                           </div>
                         </div>
                         <div className="flex flex-col gap-1 lg:w-[25%] lg:items-center lg:text-center">
-                          <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Status</span>
+                          <span className="text-[10px] tracking-wider text-slate-400 font-bold">Status</span>
                           <div>
                             <Badge variant={app.status === 'upcoming' ? 'success' : 'default'} className="capitalize px-3 py-1">
                               {app.status}
