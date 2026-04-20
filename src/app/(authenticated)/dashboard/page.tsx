@@ -17,6 +17,7 @@ import { formatDate } from '@/utils/date-helpers';
 
 import { Skeleton } from '@/components/ui/Skeleton';
 import { useEffect, useState } from 'react';
+import { UserNav } from '@/components/UserNav';
 
 export default function DashboardPage() {
   const { appointments } = useAppointments();
@@ -47,16 +48,19 @@ export default function DashboardPage() {
           <h1 className="text-4xl font-extrabold tracking-tight text-[#0f172a]">Hello, Dr. Chen</h1>
           <p className="text-slate-500 mt-2 text-lg">Welcome back to your VirtuCare dashboard. You have {upcomingCount} appointments today.</p>
         </div>
-        <div className="flex gap-3">
-          <Button variant="outline" className="rounded-2xl h-12 shadow-sm bg-white">
-            <TrendingUp size={18} className="mr-2 text-indigo-600" />
-            View Reports
-          </Button>
-          <Link href="/find-doctors">
-            <Button variant="emerald" className="rounded-2xl h-12 font-bold shadow-lg shadow-emerald-100 px-6">
-              Book New Appointment
+        <div className="flex items-center gap-6">
+          <div className="hidden sm:flex gap-3">
+            <Button variant="outline" className="rounded-2xl h-12 shadow-sm bg-white">
+              <TrendingUp size={18} className="mr-2 text-indigo-600" />
+              View Reports
             </Button>
-          </Link>
+            <Link href="/find-doctors">
+              <Button variant="emerald" className="rounded-2xl h-12 font-bold shadow-lg shadow-emerald-100 px-6">
+                Book New Appointment
+              </Button>
+            </Link>
+          </div>
+          <UserNav />
         </div>
       </div>
 

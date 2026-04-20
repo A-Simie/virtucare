@@ -10,6 +10,8 @@ import { useAppointments } from '@/hooks/useAppointments';
 import { format, addDays, startOfDay, parseISO } from 'date-fns';
 import { Avatar } from '@/components/ui/Avatar';
 
+import { useNotifications } from '@/context/NotificationContext';
+
 interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -26,6 +28,7 @@ export function BookingModal({ isOpen, onClose, doctor }: BookingModalProps) {
   const [success, setSuccess] = useState(false);
 
   const { bookAppointment } = useAppointments();
+  const { addNotification } = useNotifications();
 
   // Reset state when modal opens or doctor changes
   useEffect(() => {

@@ -18,9 +18,11 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { Avatar } from '@/components/ui/Avatar';
+import { useNotifications } from '@/context/NotificationContext';
 
 export function AppointmentTable() {
   const { appointments, cancelAppointment } = useAppointments();
+  const { addNotification } = useNotifications();
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const [confirmCancelId, setConfirmCancelId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);

@@ -1,16 +1,20 @@
-# VirtuCare | Advanced Healthcare Appointment Portal
+# VirtuCare | Premium Healthcare Appointment Ecosystem
 
-VirtuCare is a high-end medical portal designed for seamless patient-doctor interactions. Built with Next.js, TypeScript, and Tailwind CSS, it prioritizes professional aesthetics, clinical precision, and an intuitive user experience.
+VirtuCare is a high-fidelity medical management platform engineered for clinical precision and elite user experience. Built with a modern tech stack, it provides a seamless bridge between patients and healthcare professionals through an intuitive, data-driven interface.
 
-## ✨ Features
+## ✨ Core Features
 
-- **Professional Doctor Listing**: A refined, list-style view of medical specialists with detailed profiles and verified credentials.
-- **Advanced Booking Flow**: A multi-step, animated booking interface that simplifies appointment scheduling.
-- **Double-Booking Prevention**: Robust logic ensures no overlapping appointments for the same specialist.
-- **Persistent State**: Utilizes local storage to maintain appointments and user preferences across sessions.
-- **Dynamic Dashboard**: A comprehensive overview of upcoming consultations, health stats, and recent activity.
-- **Responsive Design**: Fully optimized for mobile, tablet, and desktop environments with a modern, sidebar-driven navigation.
-- **Clinical Aesthetics**: A premium UI using Slate Indigo, Deep Teal, and Emerald tones, focused on clarity and professionalism.
+- **🛡️ Global Notification System**: Real-time alerts for bookings, cancellations, and system updates with a persistent side-drawer preview and full notification history.
+- **👨‍⚕️ Professional Specialist Directory**: A curated database of medical professionals with verified badges, specialty-specific iconography, and detailed clinical bios.
+- **📅 Advanced Appointment Orchestration**:
+    - **Intelligent Booking**: Multi-step animated flow with conflict resolution and double-booking prevention.
+    - **Live Management**: Full-featured appointment table with dynamic filtering, pagination, and status tracking.
+    - **Action Center**: Contextual menus for quick actions like cancellation with confirmation safeguards.
+- **📊 Dynamic Clinical Dashboard**: Real-time health statistics, upcoming consultation tracking, and system-wide activity logs.
+- **⚡ Performance-First UI**: 
+    - **Skeleton Loading**: Integrated across all pages to ensure zero layout shift and a perceived speed boost.
+    - **Reusable Architecture**: Centralized component system (Avatar, UserNav, IconButton) for absolute visual consistency.
+- **🎨 Premium Medical Aesthetics**: A sophisticated palette (Slate Indigo, Deep Teal, Emerald) paired with squircle-based geometry for a modern, professional feel.
 
 ## 🚀 Getting Started
 
@@ -21,45 +25,44 @@ VirtuCare is a high-end medical portal designed for seamless patient-doctor inte
 
 ### Installation
 
-1. Clone the repository:
-
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/your-repo/virtucare.git
    cd virtucare
    ```
 
-2. Install dependencies:
-
+2. **Install dependencies:**
    ```bash
    npm install
    ```
 
-3. Run the development server:
-
+3. **Run the development server:**
    ```bash
    npm run dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+4. **Access the portal:**
+   Open [http://localhost:3000](http://localhost:3000) to view the landing/login page.
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 15+ (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Icons**: Lucide React
-- **Animations**: Framer Motion
-- **Date Handling**: date-fns
+- **Core**: [Next.js 15+](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **State Management**: React Context API & Custom Hooks
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Date Handling**: [date-fns](https://date-fns.org/)
 
-## 📂 Project Structure
+## 📂 Architecture
 
-- `src/app/`: Next.js App Router pages and layouts.
-- `src/components/ui/`: Atomic, reusable UI components.
-- `src/features/`: Feature-based logic and components (Doctors, Booking, Appointments).
-- `src/hooks/`: Custom React hooks for persistence and state management.
-- `src/utils/`: Shared utility functions.
-- `src/types/`: TypeScript interfaces and types.
+- `src/app/`: Next.js App Router orchestration (Layouts & Pages).
+- `src/components/ui/`: Atomic UI primitives (Buttons, Cards, Skeletons, Avatars).
+- `src/features/`: Complex feature-specific logic and domain components.
+- `src/context/`: Global state providers (Notifications, Appointments).
+- `src/hooks/`: Custom hooks for persistence and logical abstraction.
+- `src/utils/`: High-performance utility functions.
 
 ## 📄 License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

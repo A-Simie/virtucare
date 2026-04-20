@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "Advanced healthcare appointment booking system",
 };
 
+import { NotificationProvider } from "@/context/NotificationContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,11 +28,12 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-[#f8fafc] text-[#0f172a]">
-        {children}
+        <NotificationProvider>
+          {children}
+        </NotificationProvider>
       </body>
 
     </html>
 
   );
 }
-
