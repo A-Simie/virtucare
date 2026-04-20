@@ -9,15 +9,16 @@ VirtuCare is a high-fidelity medical management platform engineered for clinical
 - **🕵️ Security Session Tracking**: Automated "New Login" alerts in the notification hub to monitor account access with precise timestamps.
 - **👨‍⚕️ Professional Specialist Directory**: A curated database of medical professionals with verified badges, optimized for high-performance mobile viewing.
 - **📅 Advanced Appointment Orchestration**:
-    - **Intelligent Booking**: Multi-step animated flow with conflict resolution.
-    - **Live Management**: Full-featured table with dynamic filtering and pagination.
-- **📊 Dynamic Clinical Dashboard**: Real-time health statistics and a redesigned action center for critical medical reports.
-- **⚠️ Privacy & Data Sovereignty**: 
-    - **Secure Data Wipe**: A phrase-confirmed "Danger Zone" utility to permanently reset all local storage data.
-    - **Functional Sign Out**: Integrated session termination across the entire portal.
+    - **Intelligent Booking**: Multi-step animated flow with conflict resolution and doctor portrait persistence.
+    - **Live Management**: Full-featured table with real-time text search, status filtering (Upcoming/Cancelled), and day-based selection.
+- **🔍 Advanced Search & Discovery**: Multi-criteria search infrastructure for finding specialists and navigating historical consultations.
+- **📊 Dynamic Clinical Dashboard**: Real-time health statistics and synchronized "Recent Appointments" list with consistent visual states.
+- **🤝 Help & Legal Hub**: Integrated support center for Terms and Conditions, Privacy Policy, and 24/7 Patient Support.
 - **⚡ Performance-First UI**: 
     - **Skeleton Loading**: Zero layout shift architecture across all authenticated routes.
-    - **Pixel-Perfect Responsiveness**: Deeply optimized mobile layouts for complex clinical components.
+    - **Typography Refinement**: Standardized natural-case typography for improved readability and medical precision.
+    - **Doctor portraits**: High-resolution profile imagery integrated across all patient-facing modules.
+- **🧹 Codebase Integrity**: Production-ready codebase following a comprehensive audit and removal of unused imports and dead dependencies.
 
 ## 🚀 Getting Started
 

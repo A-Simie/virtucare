@@ -3,9 +3,11 @@ import { Bell, HelpCircle } from 'lucide-react';
 import { Avatar } from '@/components/ui/Avatar';
 import { useNotifications } from '@/context/NotificationContext';
 import { NotificationPanel } from '@/components/NotificationPanel';
+import { HelpModal } from '@/components/HelpModal';
 
 export function UserNav() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
   const { unreadCount } = useNotifications();
 
   return (
@@ -22,7 +24,10 @@ export function UserNav() {
             </span>
           )}
         </button>
-        <button className="hidden sm:flex p-2.5 text-slate-400 hover:text-[#0f172a] hover:bg-white rounded-2xl transition-all border border-transparent hover:border-slate-200 shadow-sm group">
+        <button 
+          onClick={() => setIsHelpOpen(true)}
+          className="hidden sm:flex p-2.5 text-slate-400 hover:text-[#0f172a] hover:bg-white rounded-2xl transition-all border border-transparent hover:border-slate-200 shadow-sm group"
+        >
           <HelpCircle size={20} className="group-hover:scale-110 transition-transform" />
         </button>
         <div className="ml-0.5 sm:ml-1">
@@ -38,6 +43,11 @@ export function UserNav() {
       <NotificationPanel
         isOpen={isPanelOpen}
         onClose={() => setIsPanelOpen(false)}
+      />
+
+      <HelpModal 
+        isOpen={isHelpOpen}
+        onClose={() => setIsHelpOpen(false)}
       />
     </>
   );
